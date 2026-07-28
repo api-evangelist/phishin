@@ -1,0 +1,397 @@
+{
+  "schema_version": "0.3.0",
+  "protocolVersion": "0.3.0",
+  "name": "phishin",
+  "description": "Agent interface for the Phish.in live Phish audio archive. Browse and play shows, songs, venues, tours, tags, and playlists.",
+  "url": "https://phish.in/mcp",
+  "preferredTransport": "MCP",
+  "supportedInterfaces": [
+    {
+      "transport": "MCP",
+      "url": "https://phish.in/mcp",
+      "protocolVersion": "2025-03-26"
+    },
+    {
+      "transport": "MCP",
+      "url": "https://phish.in/mcp/anthropic",
+      "protocolVersion": "2025-03-26"
+    },
+    {
+      "transport": "MCP",
+      "url": "https://phish.in/mcp/openai",
+      "protocolVersion": "2025-03-26"
+    },
+    {
+      "transport": "HTTPS+JSON",
+      "url": "https://phish.in/api/v2",
+      "protocolVersion": "2.0"
+    }
+  ],
+  "additionalInterfaces": [
+    {
+      "transport": "MCP",
+      "url": "https://phish.in/mcp/anthropic"
+    },
+    {
+      "transport": "MCP",
+      "url": "https://phish.in/mcp/openai"
+    }
+  ],
+  "provider": {
+    "organization": "Phish.in",
+    "url": "https://phish.in"
+  },
+  "version": "1.0.0",
+  "documentation_url": "https://phish.in/llms.txt",
+  "documentationUrl": "https://phish.in/llms.txt",
+  "icon_url": "https://phish.in/logo.svg",
+  "iconUrl": "https://phish.in/logo.svg",
+  "capabilities": {
+    "streaming": false,
+    "push_notifications": false,
+    "state_transition_history": false
+  },
+  "default_input_modes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "default_output_modes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "get_audio_track",
+      "name": "get_audio_track",
+      "description": "Get a song performance with audio URL. triggers: 'play [song]', 'random track', 'listen to', 'surprise me', or when user selects a performance from get_song results. params: random=true for random; slug='YYYY-MM-DD/track-slug' for specific. display: Link to track web URL (use 'url', not 'mp3_url'). The web page provides artwork, context, and navigation.",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [
+        "Play a random Phish track",
+        "Play Tweezer from 1997-11-22"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_playlist",
+      "name": "get_playlist",
+      "description": "Get a playlist with track listing, show dates, and durations. display: Link playlist name to playlist URL, track titles to track web URLs (use 'url', not 'mp3_url'). Format dates as 'Jul 4, 2023'. Show max 10 tracks. Example: | [Tweezer](track_url) | [Jul 4, 2023](show_url) |",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_show",
+      "name": "get_show",
+      "description": "Get a Phish show with full setlist, venue, tags, and gaps. triggers: 'random show', specific dates ('Halloween 1995', '12/31/99'), or follow-up to list_shows/search. params: random=true for random; date='YYYY-MM-DD' for specific. display: Format dates as 'Jul 4, 2023'. Link tracks to web URLs (use 'url', not 'mp3_url').",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [
+        "Get the Halloween 1995 show",
+        "Random Phish show"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_song",
+      "name": "get_song",
+      "description": "Get a Phish song with performance history. triggers: 'random song' or specific song by slug. params: random=true for random; slug='song-slug' for specific. display: Format dates as 'Jul 4, 2023'. Link tracks to web URLs (use 'url', not 'mp3_url').",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [
+        "Show me the history of Tweezer"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_tag",
+      "name": "get_tag",
+      "description": "Get shows or tracks associated with a specific tag. params: type='show' for tagged shows (e.g., costume); type='track' for tagged tracks (e.g., jamcharts). display: Link dates to show URLs, song names to track web URLs (use 'url', not 'mp3_url'). Format dates as 'Jul 4, 2023'. Example: | [Tweezer](track_url) | [Jul 4, 2023](show_url) |",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_tour",
+      "name": "get_tour",
+      "description": "Get a Phish tour with date range and show count. params: random=true for random; slug='tour-slug' for specific. follow-up: Use list_shows with tour_slug to get shows on this tour. display: Format dates as 'Jul 4, 2023'.",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "get_venue",
+      "name": "get_venue",
+      "description": "Get a venue with location, show count, and date range. params: random=true for random; slug='venue-slug' for specific. follow-up: Use list_shows with venue_slug to get shows at this venue. display: Format dates as 'Jul 4, 2023'.",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "list_playlists",
+      "name": "list_playlists",
+      "description": "List user-created playlists with optional sorting. follow-up: Use get_playlist with slug for full track listing. display: Link playlist names to their URLs. Example: [My Favorite Jams](url)",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "list_shows",
+      "name": "list_shows",
+      "description": "Browse shows by year, date range, tour, or venue. Returns shows WITHOUT setlists. params: At least one filter required. follow-up: Call get_show with date to get full setlist and audio. display: Link dates to show URLs, venues to venue URLs. Format dates as 'Jul 4, 2023'. Example: | [Jul 4, 2023](show_url) | [MSG](venue_url) |",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [
+        "List all 1995 shows",
+        "Shows at Red Rocks"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "list_songs",
+      "name": "list_songs",
+      "description": "List Phish songs with optional filtering and sorting. follow-up: Use get_song with slug for detailed performance history. display: Link song titles to their URLs. Example: [Tweezer](url)",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [
+        "All Phish songs starting with T"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "list_tags",
+      "name": "list_tags",
+      "description": "List all tags with show and track counts. Tags categorize content: Jamcharts (notable jams), Costume, Guest, Debut, and more. follow-up: Use get_tag with a tag slug to see tagged items.",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "list_tours",
+      "name": "list_tours",
+      "description": "List all Phish tours with optional year filtering. follow-up: Use get_tour with slug for tour details.",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "list_venues",
+      "name": "list_venues",
+      "description": "List Phish venues with optional geographic filtering. follow-up: Use get_venue with slug for venue details. display: Link venue names to their URLs. Example: [Madison Square Garden](url)",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [
+        "Venues in Colorado"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "list_years",
+      "name": "list_years",
+      "description": "List all years/eras when Phish performed, with show counts. Eras: 1.0 (1983-2000), 2.0 (2002-2004), 3.0 (2009-2020), 4.0 (2021+). follow-up: Use list_shows with year to see shows. display: Link years to their URLs. Example: [1995](url)",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "search",
+      "name": "search",
+      "description": "Case-insensitive substring search across shows, songs, venues, tours, tags, and playlists. note: For specific dates ('Halloween 95', 'NYE 99'), use get_show directly. follow-up: Call get_show for full setlist and audio details. display: Link dates to show URLs, titles to song URLs, names to venue URLs. Format dates as 'Jul 4, 2023'. api: https://phish.in/api/v2/swagger_doc (no key required)",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [
+        "Find all shows at Madison Square Garden",
+        "Search for Tweezer jams"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    },
+    {
+      "id": "stats",
+      "name": "stats",
+      "description": "Statistical analysis: gaps (bustouts), transitions, set positions, geographic patterns, co-occurrence, and song frequency. display: Link song names to song URLs, dates to track web URLs (use 'url', not 'mp3_url'). Format dates as 'Jul 4, 2023'. Example: | [Tweezer](song_url) | 42 | [Dec 31, 1995](track_url) | api: https://phish.in/api/v2/swagger_doc (no key required)",
+      "tags": [
+        "phish",
+        "live-music",
+        "archive"
+      ],
+      "examples": [
+        "Longest gap for Harpua",
+        "Most-played songs of 1997"
+      ],
+      "inputModes": [
+        "text/plain",
+        "application/json"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/json"
+      ]
+    }
+  ]
+}

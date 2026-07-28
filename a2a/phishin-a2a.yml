@@ -1,0 +1,33 @@
+generated: '2026-07-28'
+method: probed
+source: https://phish.in/.well-known/agent-card.json
+description: 'A2A Agent Card observed at /.well-known/agent-card.json on phish.in. Grade is measured against
+  the A2A 1.0.0 AgentCard object: ''conformant'' passes every structural check, ''near-conformant'' is
+  correctly shaped but omits optional fields, ''flavored'' fails a hard check and is an agent card in
+  spirit rather than in schema. Provider-published by construction — served from the provider''s own host;
+  nothing here is derived or generated.'
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: phish.in
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  protocol_version: 0.3.0
+  preferred_transport: MCP
+  deviations: []
+card:
+  name: phishin
+  description: Agent interface for the Phish.in live Phish audio archive. Browse and play shows, songs,
+    venues, tours, tags, and playlists.
+  url: https://phish.in/mcp
+  version: 1.0.0
+  documentation_url: https://phish.in/llms.txt
+  skills: 16
+  file: phishin-agent-card.json
+x-evidence:
+  fetched: '2026-07-28'
+  url: https://phish.in/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  note: Verbatim body saved alongside this manifest. No field inferred.
