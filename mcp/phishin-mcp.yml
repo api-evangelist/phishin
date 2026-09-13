@@ -1,0 +1,51 @@
+generated: '2026-09-11'
+method: probed
+source: https://phish.in/mcp
+status: published
+server:
+  name: phishin
+  transport: http
+  url: https://phish.in/mcp
+deployment:
+  mode: remote
+  endpoint: https://phish.in/mcp
+  verified: probed
+  probe: live
+  checked: '2026-09-11'
+  source: docs-check 2026-09-12 (endpoint found in the provider's own documentation, then probed)
+tools_count: 16
+tools:
+- name: get_audio_track
+  description: ''
+- name: get_playlist
+  description: ''
+- name: get_show
+  description: ''
+- name: get_song
+  description: ''
+- name: get_tag
+  description: ''
+- name: get_tour
+  description: ''
+- name: get_venue
+  description: ''
+- name: list_playlists
+  description: ''
+- name: list_shows
+  description: ''
+- name: list_songs
+  description: ''
+- name: list_tags
+  description: ''
+- name: list_tours
+  description: ''
+- name: list_venues
+  description: ''
+- name: list_years
+  description: ''
+- name: search
+  description: ''
+- name: stats
+  description: ''
+tools_source: live tools/list via initialize handshake, 2026-09-12 (signals/audit_mcp_authorship.py --probe)
+authorship: provider
