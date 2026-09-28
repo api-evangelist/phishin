@@ -16,36 +16,65 @@ deployment:
 tools_count: 16
 tools:
 - name: get_audio_track
-  description: ''
+  description: 'Get a song performance with audio URL. triggers: ''play [song]'', ''random track'', ''listen
+    to'', ''surprise me'', or when user selects a performance from get_song results. params: random=true
+    for random; slug=''YYYY-MM-DD/track-slug'' for specific.'
 - name: get_playlist
-  description: ''
+  description: 'Get a playlist with track listing, show dates, and durations. display: Link playlist name
+    to playlist URL, track titles to track web URLs (use ''url'', not ''mp3_url''). Format dates as ''Jul
+    4, 2023''. Show max 10 tracks. Example: | [Tweezer](tr'
 - name: get_show
-  description: ''
+  description: 'Get a Phish show with full setlist, venue, tags, and gaps. triggers: ''random show'',
+    specific dates (''Halloween 1995'', ''12/31/99''), or follow-up to list_shows/search. params: random=true
+    for random; date=''YYYY-MM-DD'' for specific. display: F'
 - name: get_song
-  description: ''
+  description: 'Get a Phish song with performance history. triggers: ''random song'' or specific song
+    by slug. params: random=true for random; slug=''song-slug'' for specific. display: Format dates as
+    ''Jul 4, 2023''. Link tracks to web URLs (use ''url'', not ''mp3'
 - name: get_tag
-  description: ''
+  description: 'Get shows or tracks associated with a specific tag. params: type=''show'' for tagged shows
+    (e.g., costume); type=''track'' for tagged tracks (e.g., jamcharts). display: Link dates to show URLs,
+    song names to track web URLs (use ''url'', not ''mp3_'
 - name: get_tour
-  description: ''
+  description: 'Get a Phish tour with date range and show count. params: random=true for random; slug=''tour-slug''
+    for specific. follow-up: Use list_shows with tour_slug to get shows on this tour. display: Format
+    dates as ''Jul 4, 2023''.'
 - name: get_venue
-  description: ''
+  description: 'Get a venue with location, show count, and date range. params: random=true for random;
+    slug=''venue-slug'' for specific. follow-up: Use list_shows with venue_slug to get shows at this venue.
+    display: Format dates as ''Jul 4, 2023''.'
 - name: list_playlists
-  description: ''
+  description: 'List user-created playlists with optional sorting. follow-up: Use get_playlist with slug
+    for full track listing. display: Link playlist names to their URLs. Example: [My Favorite Jams](url)'
 - name: list_shows
-  description: ''
+  description: 'Browse shows by year, date range, tour, or venue. Returns shows WITHOUT setlists. params:
+    At least one filter required. follow-up: Call get_show with date to get full setlist and audio. display:
+    Link dates to show URLs, venues to venue URLs'
 - name: list_songs
-  description: ''
+  description: 'List Phish songs with optional filtering and sorting. follow-up: Use get_song with slug
+    for detailed performance history. display: Link song titles to their URLs. Example: [Tweezer](url)'
 - name: list_tags
-  description: ''
+  description: 'List all tags with show and track counts. Tags categorize content: Jamcharts (notable
+    jams), Costume, Guest, Debut, and more. follow-up: Use get_tag with a tag slug to see tagged items.'
 - name: list_tours
-  description: ''
+  description: 'List all Phish tours with optional year filtering. follow-up: Use get_tour with slug for
+    tour details.'
 - name: list_venues
-  description: ''
+  description: 'List Phish venues with optional geographic filtering. follow-up: Use get_venue with slug
+    for venue details. display: Link venue names to their URLs. Example: [Madison Square Garden](url)'
 - name: list_years
-  description: ''
+  description: 'List all years/eras when Phish performed, with show counts. Eras: 1.0 (1983-2000), 2.0
+    (2002-2004), 3.0 (2009-2020), 4.0 (2021+). follow-up: Use list_shows with year to see shows. display:
+    Link years to their URLs. Example: [1995](url)'
 - name: search
-  description: ''
+  description: 'Case-insensitive substring search across shows, songs, venues, tours, tags, and playlists.
+    note: For specific dates (''Halloween 95'', ''NYE 99''), use get_show directly. follow-up: Call get_show
+    for full setlist and audio details. display: Lin'
 - name: stats
-  description: ''
+  description: 'Statistical analysis: gaps (bustouts), transitions, set positions, geographic patterns,
+    co-occurrence, and song frequency. display: Link song names to song URLs, dates to track web URLs
+    (use ''url'', not ''mp3_url''). Format dates as ''Jul 4, 20'
 tools_source: live tools/list via initialize handshake, 2026-09-12 (signals/audit_mcp_authorship.py --probe)
 authorship: provider
+descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
+  --descriptions, 2026-09-28
