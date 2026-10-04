@@ -35,11 +35,11 @@ x-tier-reason: bulk-registered-from-public-apis
 tags:
   - Music
   - Public APIs
+  - A2A
 apis:
   - name: Phishin
     description: "A web-based archive of legal live audio recordings of the improvisational rock band Phish"
     humanURL: https://phish.in/api-docs
-    baseURL: https://phish.in/api-docs
     tags:
       - Music
     properties:
@@ -59,3 +59,10 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-a2a:
+  verified: true
+  probed: '2026-09-26'
+  url: "https://phish.in/.well-known/agent-card.json"
+  grade: "conformant"
+  protocol_version: "0.3.0"
+  control: 404
