@@ -1,0 +1,14 @@
+{
+  "repo": "phishin",
+  "feeds": [
+    {
+      "source": "https://phish.in/feeds/rss",
+      "feed_url": "https://phish.in/feeds/rss",
+      "title": "",
+      "saved": 5,
+      "method": "feed"
+    }
+  ],
+  "post_count": 5,
+  "fetched": "2026-10-10T13:15:00Z"
+}
