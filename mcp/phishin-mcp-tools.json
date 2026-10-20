@@ -1,0 +1,1783 @@
+{
+  "endpoint": "https://phish.in/mcp",
+  "captured": "2026-10-20",
+  "method": "initialize + tools/list (anonymous, no tool called; roadmap#992)",
+  "protocol_version": "2025-06-18",
+  "server_info": {
+    "name": "phishin",
+    "version": "1.0.0"
+  },
+  "result": {
+    "tools": [
+      {
+        "name": "get_audio_track",
+        "description": "Get a song performance with audio URL. triggers: 'play [song]', 'random track', 'listen to', 'surprise me', or when user selects a performance from get_song results. params: random=true for random; slug='YYYY-MM-DD/track-slug' for specific. display: Link to track web URL (use 'url', not 'mp3_url'). The web page provides artwork, context, and navigation.",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Track slug: 'YYYY-MM-DD/track-slug' (e.g., '1997-11-22/tweezer'). Omit for random."
+            },
+            "random": {
+              "type": "boolean",
+              "description": "Set to true for a random audio track"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "description": "Audio track widget data with playback URLs, navigation, and adjacent shows",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string",
+              "description": "ISO 8601 date"
+            },
+            "show_url": {
+              "type": "string"
+            },
+            "mp3_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "duration_ms": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "waveform_image_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "venue": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "venue_slug": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "location": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cover_art_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "slug": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "notes": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "set": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "position": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "base_url": {
+              "type": "string"
+            },
+            "current_track_index": {
+              "type": "integer"
+            },
+            "is_library_start": {
+              "type": "boolean"
+            },
+            "is_library_end": {
+              "type": "boolean"
+            },
+            "show": {
+              "type": "object",
+              "description": "Full show data including all playable tracks"
+            },
+            "prev_show": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "next_show": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "get_playlist",
+        "description": "Get a playlist with track listing, show dates, and durations. display: Link playlist name to playlist URL, track titles to track web URLs (use 'url', not 'mp3_url'). Format dates as 'Jul 4, 2023'. Show max 10 tracks. Example: | [Tweezer](track_url) | [Jul 4, 2023](show_url) |",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Playlist slug (omit for random playlist)"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "description": "Playlist widget data with track listing, durations, and cover art",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "duration_ms": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "duration_display": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "track_count": {
+              "type": "integer"
+            },
+            "username": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cover_art_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "tracks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "position": {
+                    "type": "integer"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "show_url": {
+                    "type": "string"
+                  },
+                  "venue": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "venue_slug": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "venue_url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "location": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "duration_ms": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "duration_display": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "mp3_url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "waveform_image_url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "slug": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "description": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "notes": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "get_show",
+        "description": "Get a Phish show with full setlist, venue, tags, and gaps. triggers: 'random show', specific dates ('Halloween 1995', '12/31/99'), or follow-up to list_shows/search. params: random=true for random; date='YYYY-MM-DD' for specific. display: Format dates as 'Jul 4, 2023'. Link tracks to web URLs (use 'url', not 'mp3_url').",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "date": {
+              "type": "string",
+              "description": "Show date (YYYY-MM-DD). Omit for random show."
+            },
+            "random": {
+              "type": "boolean",
+              "description": "Set to true for a random show (ignores date)"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "description": "Show widget data with full setlist, venue, tags, and album cover",
+          "properties": {
+            "date": {
+              "type": "string",
+              "description": "ISO 8601 date"
+            },
+            "previous_show_date": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "next_show_date": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "venue": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "venue_slug": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "location": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "duration_ms": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "taper_notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cover_art_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cover_art_url_large": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "album_cover_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "show_url": {
+              "type": "string"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "slug": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "notes": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "tracks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "set": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "duration": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "duration_ms": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "mp3_url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "waveform_image_url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "song": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "slug": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "description": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "notes": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "gap": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "previous": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "next": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ]
+                      },
+                      "previous_slug": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "next_slug": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "get_song",
+        "description": "Get a Phish song with performance history. triggers: 'random song' or specific song by slug. params: random=true for random; slug='song-slug' for specific. display: Format dates as 'Jul 4, 2023'. Link tracks to web URLs (use 'url', not 'mp3_url').",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Song slug (e.g., 'tweezer', 'you-enjoy-myself'). Omit for random song."
+            },
+            "random": {
+              "type": "boolean",
+              "description": "Set to true for a random song (ignores slug)"
+            },
+            "sort_by": {
+              "type": "string",
+              "enum": [
+                "date",
+                "likes",
+                "duration",
+                "random"
+              ],
+              "description": "Sort performances by date (default), likes, duration, or random"
+            },
+            "sort_order": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "Sort order: asc or desc (default: desc)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max performances to return (default: 25)"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "description": "Song details with performance history",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "original": {
+              "type": "boolean"
+            },
+            "artist": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "alias": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "times_played": {
+              "type": "integer"
+            },
+            "first_played": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "last_played": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "performances": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "type": "string"
+                  },
+                  "venue": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "location": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "duration_ms": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "duration_display": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "likes": {
+                    "type": "integer"
+                  },
+                  "set": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "show_url": {
+                    "type": "string"
+                  },
+                  "track_url": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "get_tag",
+        "description": "Get shows or tracks associated with a specific tag. params: type='show' for tagged shows (e.g., costume); type='track' for tagged tracks (e.g., jamcharts). display: Link dates to show URLs, song names to track web URLs (use 'url', not 'mp3_url'). Format dates as 'Jul 4, 2023'. Example: | [Tweezer](track_url) | [Jul 4, 2023](show_url) |",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Tag slug (e.g., 'jamcharts', 'costume', 'guest')"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "show",
+                "track"
+              ],
+              "description": "Entity type to return: 'show' for tagged shows, 'track' for tagged tracks"
+            },
+            "sort_by": {
+              "type": "string",
+              "enum": [
+                "date",
+                "likes",
+                "duration",
+                "random"
+              ],
+              "description": "Sort by date (default), likes, duration (tracks only), or random"
+            },
+            "sort_order": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "Sort order: asc or desc (default: desc)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max items to return (default: 25)"
+            }
+          },
+          "required": [
+            "slug",
+            "type"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "description": "Tag details with associated shows or tracks",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "group": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "shows_count": {
+              "type": "integer"
+            },
+            "tracks_count": {
+              "type": "integer"
+            },
+            "shows": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "tracks": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "get_tour",
+        "description": "Get a Phish tour with date range and show count. params: random=true for random; slug='tour-slug' for specific. follow-up: Use list_shows with tour_slug to get shows on this tour. display: Format dates as 'Jul 4, 2023'.",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Tour slug (e.g., 'fall-tour-1997', 'summer-tour-2023'). Omit for random tour."
+            },
+            "random": {
+              "type": "boolean",
+              "description": "Set to true for a random tour (ignores slug)"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "description": "Tour metadata",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "starts_on": {
+              "type": "string"
+            },
+            "ends_on": {
+              "type": "string"
+            },
+            "shows_count": {
+              "type": "integer"
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "get_venue",
+        "description": "Get a venue with location, show count, and date range. params: random=true for random; slug='venue-slug' for specific. follow-up: Use list_shows with venue_slug to get shows at this venue. display: Format dates as 'Jul 4, 2023'.",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Venue slug (e.g., 'madison-square-garden'). Omit for random venue."
+            },
+            "random": {
+              "type": "boolean",
+              "description": "Set to true for a random venue (ignores slug)"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "description": "Venue details with location and performance history",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "slug": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "city": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "country": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "location": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "other_names": {
+              "type": [
+                "array",
+                "null"
+              ]
+            },
+            "latitude": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "longitude": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "shows_count": {
+              "type": "integer"
+            },
+            "first_show": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "last_show": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "list_playlists",
+        "description": "List user-created playlists with optional sorting. follow-up: Use get_playlist with slug for full track listing. display: Link playlist names to their URLs. Example: [My Favorite Jams](url)",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "sort_by": {
+              "type": "string",
+              "enum": [
+                "name",
+                "likes_count",
+                "tracks_count",
+                "duration",
+                "updated_at",
+                "random"
+              ],
+              "description": "Sort by name, likes_count (default), tracks_count, duration, updated_at, or random"
+            },
+            "sort_order": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "Sort order: asc or desc (default)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max playlists to return (default: 50)"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "playlists": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "slug": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "duration_ms": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "duration_display": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "tracks_count": {
+                    "type": "integer"
+                  },
+                  "likes_count": {
+                    "type": "integer"
+                  },
+                  "author": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "updated_at": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "list_shows",
+        "description": "Browse shows by year, date range, tour, or venue. Returns shows WITHOUT setlists. params: At least one filter required. follow-up: Call get_show with date to get full setlist and audio. display: Link dates to show URLs, venues to venue URLs. Format dates as 'Jul 4, 2023'. Example: | [Jul 4, 2023](show_url) | [MSG](venue_url) |",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "year": {
+              "type": "integer",
+              "description": "Filter by year (e.g., 1997)"
+            },
+            "start_date": {
+              "type": "string",
+              "description": "Start date for range filter (YYYY-MM-DD)"
+            },
+            "end_date": {
+              "type": "string",
+              "description": "End date for range filter (YYYY-MM-DD)"
+            },
+            "tour_slug": {
+              "type": "string",
+              "description": "Filter by tour slug (e.g., 'fall-tour-1997')"
+            },
+            "venue_slug": {
+              "type": "string",
+              "description": "Filter by venue slug (e.g., 'madison-square-garden')"
+            },
+            "sort_by": {
+              "type": "string",
+              "enum": [
+                "date",
+                "likes",
+                "duration",
+                "random"
+              ],
+              "description": "Sort by date (default), likes, duration, or random"
+            },
+            "sort_order": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "Sort order: asc (default for date) or desc"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max shows to return (default: 50)"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "filters": {
+              "type": "object"
+            },
+            "shows": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "venue": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "venue_url": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "location": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "tour": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "duration_ms": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "duration_display": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "likes": {
+                    "type": "integer"
+                  },
+                  "audio_status": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "list_songs",
+        "description": "List Phish songs with optional filtering and sorting. follow-up: Use get_song with slug for detailed performance history. display: Link song titles to their URLs. Example: [Tweezer](url)",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "song_type": {
+              "type": "string",
+              "enum": [
+                "all",
+                "original",
+                "cover"
+              ],
+              "description": "Filter by song type: all (default), original, or cover"
+            },
+            "sort_by": {
+              "type": "string",
+              "enum": [
+                "name",
+                "times_played"
+              ],
+              "description": "Sort by name (default) or times_played"
+            },
+            "sort_order": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "Sort order: asc (default for name) or desc (default for times_played)"
+            },
+            "min_plays": {
+              "type": "integer",
+              "description": "Minimum number of performances (filters out rarely played songs)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max songs to return (default: 50)"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "songs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "slug": {
+                    "type": "string"
+                  },
+                  "original": {
+                    "type": "boolean"
+                  },
+                  "artist": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "times_played": {
+                    "type": "integer"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "list_tags",
+        "description": "List all tags with show and track counts. Tags categorize content: Jamcharts (notable jams), Costume, Guest, Debut, and more. follow-up: Use get_tag with a tag slug to see tagged items.",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {},
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "slug": {
+                    "type": "string"
+                  },
+                  "group": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "shows_count": {
+                    "type": "integer"
+                  },
+                  "tracks_count": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "list_tours",
+        "description": "List all Phish tours with optional year filtering. follow-up: Use get_tour with slug for tour details.",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "year": {
+              "type": "integer",
+              "description": "Filter tours by year (e.g., 1997)"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "tours": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "slug": {
+                    "type": "string"
+                  },
+                  "starts_on": {
+                    "type": "string"
+                  },
+                  "ends_on": {
+                    "type": "string"
+                  },
+                  "shows_count": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "list_venues",
+        "description": "List Phish venues with optional geographic filtering. follow-up: Use get_venue with slug for venue details. display: Link venue names to their URLs. Example: [Madison Square Garden](url)",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "city": {
+              "type": "string",
+              "description": "Filter by city name"
+            },
+            "state": {
+              "type": "string",
+              "description": "Filter by state (e.g., 'NY', 'California')"
+            },
+            "country": {
+              "type": "string",
+              "description": "Filter by country (e.g., 'USA', 'Germany')"
+            },
+            "sort_by": {
+              "type": "string",
+              "enum": [
+                "name",
+                "shows_count"
+              ],
+              "description": "Sort by name (default) or shows_count"
+            },
+            "sort_order": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "Sort order: asc (default for name) or desc (default for shows_count)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max venues to return (default: 50)"
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer"
+            },
+            "filters": {
+              "type": "object"
+            },
+            "venues": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "slug": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "state": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "country": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "location": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "shows_count": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "list_years",
+        "description": "List all years/eras when Phish performed, with show counts. Eras: 1.0 (1983-2000), 2.0 (2002-2004), 3.0 (2009-2020), 4.0 (2021+). follow-up: Use list_shows with year to see shows. display: Link years to their URLs. Example: [1995](url)",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {},
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "total_shows": {
+              "type": "integer"
+            },
+            "total_shows_with_audio": {
+              "type": "integer"
+            },
+            "years": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "period": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "era": {
+                    "type": "string"
+                  },
+                  "shows_count": {
+                    "type": "integer"
+                  },
+                  "shows_with_audio_count": {
+                    "type": "integer"
+                  },
+                  "shows_duration_ms": {
+                    "type": "integer"
+                  },
+                  "venues_count": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "search",
+        "description": "Case-insensitive substring search across shows, songs, venues, tours, tags, and playlists. note: For specific dates ('Halloween 95', 'NYE 99'), use get_show directly. follow-up: Call get_show for full setlist and audio details. display: Link dates to show URLs, titles to song URLs, names to venue URLs. Format dates as 'Jul 4, 2023'. api: https://phish.in/api/v2/swagger_doc (no key required)",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search query (2-200 characters)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max results per category (default: 25)"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "description": "Multi-category search results",
+          "properties": {
+            "query": {
+              "type": "string"
+            },
+            "total_results": {
+              "type": "integer"
+            },
+            "shows": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "songs": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "venues": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "tours": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "tracks": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "playlists": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      },
+      {
+        "name": "stats",
+        "description": "Statistical analysis: gaps (bustouts), transitions, set positions, geographic patterns, co-occurrence, and song frequency. display: Link song names to song URLs, dates to track web URLs (use 'url', not 'mp3_url'). Format dates as 'Jul 4, 2023'. Example: | [Tweezer](song_url) | 42 | [Dec 31, 1995](track_url) | api: https://phish.in/api/v2/swagger_doc (no key required)",
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "properties": {
+            "stat_type": {
+              "type": "string",
+              "enum": [
+                "gaps",
+                "transitions",
+                "set_positions",
+                "geographic",
+                "co_occurrence",
+                "song_frequency"
+              ],
+              "description": "Which statistic to compute. This selects the analysis and determines which other parameters apply; each parameter below notes the stat_type(s) it affects."
+            },
+            "song_slug": {
+              "type": "string",
+              "description": "Song slug. Required when stat_type is 'co_occurrence' (the primary song). Optional for 'transitions' and 'set_positions' to scope results to one song. Ignored by other stat_types."
+            },
+            "song_b_slug": {
+              "type": "string",
+              "description": "Second song slug. Used only by 'co_occurrence': when provided, compares this song against song_slug; when omitted, returns song_slug's most common pairings."
+            },
+            "venue_slug": {
+              "type": "string",
+              "description": "Venue slug filter. Applies only to 'song_frequency'; ignored by other stat_types."
+            },
+            "year": {
+              "type": "integer",
+              "description": "Filter to a single year. Applies only to 'song_frequency'. Mutually exclusive with year_range; if both are given, year takes precedence."
+            },
+            "year_range": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "minItems": 2,
+              "maxItems": 2,
+              "description": "Inclusive year range as exactly two integers in ascending order: [start_year, end_year]. Applies only to 'song_frequency'. Ignored when year is provided."
+            },
+            "tour_slug": {
+              "type": "string",
+              "description": "Tour slug filter. Applies only to 'song_frequency'; ignored by other stat_types."
+            },
+            "state": {
+              "type": "string",
+              "description": "Two-letter US state code. Required when stat_type is 'geographic' and geo_type is 'never_played'. Also acts as a filter for 'song_frequency'. Ignored by other stat_types."
+            },
+            "min_gap": {
+              "type": "integer",
+              "description": "Minimum show gap for bustout queries. Used only by 'gaps'."
+            },
+            "min_plays": {
+              "type": "integer",
+              "description": "Minimum times played to include (default: 2). Used only by 'gaps'."
+            },
+            "position": {
+              "type": "string",
+              "enum": [
+                "opener",
+                "closer",
+                "encore"
+              ],
+              "description": "Set position filter. Used only by 'set_positions'."
+            },
+            "set": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
+              "description": "Set number for opener/closer analysis (default: 1 for openers, 2 for closers). Used only by 'set_positions'."
+            },
+            "direction": {
+              "type": "string",
+              "enum": [
+                "before",
+                "after"
+              ],
+              "description": "Transition direction (default: after). Used only by 'transitions'."
+            },
+            "geo_type": {
+              "type": "string",
+              "enum": [
+                "state_frequency",
+                "never_played",
+                "state_debuts"
+              ],
+              "description": "Geographic analysis type (default: state_frequency). Used only by 'geographic'. 'never_played' additionally requires state."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max results to return (default: 25). Set this to match how many results you intend to display."
+            }
+          },
+          "required": [
+            "stat_type"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "stat_type": {
+                    "const": "co_occurrence"
+                  }
+                },
+                "required": [
+                  "stat_type"
+                ]
+              },
+              "then": {
+                "required": [
+                  "song_slug"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "stat_type": {
+                    "const": "geographic"
+                  },
+                  "geo_type": {
+                    "const": "never_played"
+                  }
+                },
+                "required": [
+                  "stat_type",
+                  "geo_type"
+                ]
+              },
+              "then": {
+                "required": [
+                  "state"
+                ]
+              }
+            }
+          ],
+          "type": "object"
+        },
+        "outputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "description": "Statistical analysis result. Shape varies by stat_type (gaps, transitions, set_positions, geographic, co_occurrence, song_frequency)."
+        },
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false,
+          "readOnlyHint": true
+        }
+      }
+    ]
+  }
+}
