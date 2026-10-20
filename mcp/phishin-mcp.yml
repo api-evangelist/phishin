@@ -18,23 +18,26 @@ tools:
 - name: get_audio_track
   description: 'Get a song performance with audio URL. triggers: ''play [song]'', ''random track'', ''listen
     to'', ''surprise me'', or when user selects a performance from get_song results. params: random=true
-    for random; slug=''YYYY-MM-DD/track-slug'' for specific.'
+    for random; slug=''YYYY-MM-DD/track-slug'' for specific. display: Link to track web URL (use ''url'',
+    not ''mp3_url''). The web page provides artwork, context, and navigation.'
 - name: get_playlist
   description: 'Get a playlist with track listing, show dates, and durations. display: Link playlist name
     to playlist URL, track titles to track web URLs (use ''url'', not ''mp3_url''). Format dates as ''Jul
-    4, 2023''. Show max 10 tracks. Example: | [Tweezer](tr'
+    4, 2023''. Show max 10 tracks. Example: | [Tweezer](track_url) | [Jul 4, 2023](show_url) |'
 - name: get_show
   description: 'Get a Phish show with full setlist, venue, tags, and gaps. triggers: ''random show'',
     specific dates (''Halloween 1995'', ''12/31/99''), or follow-up to list_shows/search. params: random=true
-    for random; date=''YYYY-MM-DD'' for specific. display: F'
+    for random; date=''YYYY-MM-DD'' for specific. display: Format dates as ''Jul 4, 2023''. Link tracks
+    to web URLs (use ''url'', not ''mp3_url'').'
 - name: get_song
   description: 'Get a Phish song with performance history. triggers: ''random song'' or specific song
     by slug. params: random=true for random; slug=''song-slug'' for specific. display: Format dates as
-    ''Jul 4, 2023''. Link tracks to web URLs (use ''url'', not ''mp3'
+    ''Jul 4, 2023''. Link tracks to web URLs (use ''url'', not ''mp3_url'').'
 - name: get_tag
   description: 'Get shows or tracks associated with a specific tag. params: type=''show'' for tagged shows
     (e.g., costume); type=''track'' for tagged tracks (e.g., jamcharts). display: Link dates to show URLs,
-    song names to track web URLs (use ''url'', not ''mp3_'
+    song names to track web URLs (use ''url'', not ''mp3_url''). Format dates as ''Jul 4, 2023''. Example:
+    | [Tweezer](track_url) | [Jul 4, 2023](show_url) |'
 - name: get_tour
   description: 'Get a Phish tour with date range and show count. params: random=true for random; slug=''tour-slug''
     for specific. follow-up: Use list_shows with tour_slug to get shows on this tour. display: Format
@@ -49,7 +52,8 @@ tools:
 - name: list_shows
   description: 'Browse shows by year, date range, tour, or venue. Returns shows WITHOUT setlists. params:
     At least one filter required. follow-up: Call get_show with date to get full setlist and audio. display:
-    Link dates to show URLs, venues to venue URLs'
+    Link dates to show URLs, venues to venue URLs. Format dates as ''Jul 4, 2023''. Example: | [Jul 4,
+    2023](show_url) | [MSG](venue_url) |'
 - name: list_songs
   description: 'List Phish songs with optional filtering and sorting. follow-up: Use get_song with slug
     for detailed performance history. display: Link song titles to their URLs. Example: [Tweezer](url)'
@@ -69,11 +73,13 @@ tools:
 - name: search
   description: 'Case-insensitive substring search across shows, songs, venues, tours, tags, and playlists.
     note: For specific dates (''Halloween 95'', ''NYE 99''), use get_show directly. follow-up: Call get_show
-    for full setlist and audio details. display: Lin'
+    for full setlist and audio details. display: Link dates to show URLs, titles to song URLs, names to
+    venue URLs. Format dates as ''Jul 4, 2023''. api: https://phish.in/api/v2/swagger_doc (no key required)'
 - name: stats
   description: 'Statistical analysis: gaps (bustouts), transitions, set positions, geographic patterns,
     co-occurrence, and song frequency. display: Link song names to song URLs, dates to track web URLs
-    (use ''url'', not ''mp3_url''). Format dates as ''Jul 4, 20'
+    (use ''url'', not ''mp3_url''). Format dates as ''Jul 4, 2023''. Example: | [Tweezer](song_url) |
+    42 | [Dec 31, 1995](track_url) | api: https://phish.in/api/v2/swagger_doc (no key required)'
 tools_source: live tools/list via initialize handshake, 2026-09-12 (signals/audit_mcp_authorship.py --probe)
 authorship: provider
 descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
